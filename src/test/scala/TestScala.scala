@@ -4,13 +4,22 @@ import org.scalatest.matchers.should
 import scala.language.postfixOps
 
 class TestScala extends AnyFlatSpec with should.Matchers {
+  "Function" should "work" in {
+    def add2(x: Int): Int = x+2
+    add2(2) shouldBe 4
+  }
 
-  "Function" should "allow multiples parameters" in {
+  it should "allow multiples parameters" in {
     def modulus(x:Double, y:Double): Double = math.sqrt(math.pow(x, 2)+math.pow(y, 2))
     modulus(math.sqrt(2)/2, math.sqrt(2)/2) shouldBe 1
   }
 
-  "Lambda" should "allow multiples parameters" in {
+  "Lambda" should "work" in {
+    val add2: Int => Int = _ + 2
+    add2(2) shouldBe 4
+  }
+
+  it should "allow multiples parameters" in {
     val modulus = (x: Double, y: Double) => math.sqrt(math.pow(x,2)+math.pow(y,2))
     modulus(math.sqrt(2)/2, math.sqrt(2)/2) shouldBe 1
   }
