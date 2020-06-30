@@ -1,5 +1,8 @@
+import org.json4s.JsonAST.JObject
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
+
+import scala.language.postfixOps
 
 class TestScala extends AnyFlatSpec with should.Matchers {
 
@@ -85,5 +88,23 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     b.toBinaryString shouldBe "1000010"
     b += 10
     b.toBinaryString shouldBe "1001100"
+  }
+
+  "Json" should "be easy to manage" in {
+    import org.json4s._
+    import org.json4s.native.JsonMethods._
+    import org.json4s.JsonDSL._
+    implicit val formats = DefaultFormats
+
+    val json: JObject =
+      ("Key" -> (
+        ("attribute1" -> 0) ~
+        ("attribute2" -> 1) ~
+        ("attribute3" -> 2)
+        )
+      )
+    val res = (json \ "Key" \ "attribute2")
+    res.extract[Int] shouldBe 1
+
   }
 }
