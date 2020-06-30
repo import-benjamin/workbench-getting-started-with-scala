@@ -71,4 +71,13 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     switch(3) shouldBe "three"
     switch(4) shouldBe "Hello, there"
   }
+
+  "Binary" should "be able to increment" in {
+    var b: Int = 65
+    b.toBinaryString shouldBe "1000001"
+    b += 1
+    b.toBinaryString shouldBe "1000010"
+    b += 10
+    b.toBinaryString shouldBe "1001100"
+  }
 }
