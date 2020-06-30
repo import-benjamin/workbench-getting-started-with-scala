@@ -10,6 +10,11 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     modulus(math.sqrt(2)/2, math.sqrt(2)/2) shouldBe 1
   }
 
+  "Lambda" should "allow multiples parameters" in {
+    val modulus = (x: Double, y: Double) => math.sqrt(math.pow(x,2)+math.pow(y,2))
+    modulus(math.sqrt(2)/2, math.sqrt(2)/2) shouldBe 1
+  }
+
   "Curring" should "work with lambda" in {
     // with lambda
     val g = (x:Int) => (y:Int) => (z:Int) => x+y+z
