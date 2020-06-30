@@ -33,7 +33,7 @@ class TestScala extends AnyFlatSpec with should.Matchers {
   }
 
   it should "be able to pass function as argument" in {
-    def f(x:Int)(op:(Int)=>Int):Int = op(x)
+    def f(x:Int)(op: Int =>Int):Int = op(x)
     val res = f(10)(_+1) // or f(10)(x=>x+1)
     res shouldBe 11
   }
@@ -92,18 +92,16 @@ class TestScala extends AnyFlatSpec with should.Matchers {
 
   "Json" should "be easy to manage" in {
     import org.json4s._
-    import org.json4s.native.JsonMethods._
     import org.json4s.JsonDSL._
-    implicit val formats = DefaultFormats
+    implicit val formats: DefaultFormats.type = DefaultFormats
 
     val json: JObject =
-      ("Key" -> (
+      "Key" -> (
         ("attribute1" -> 0) ~
         ("attribute2" -> 1) ~
         ("attribute3" -> 2)
         )
-      )
-    val res = (json \ "Key" \ "attribute2")
+    val res = json \ "Key" \ "attribute2"
     res.extract[Int] shouldBe 1
 
   }
