@@ -1,4 +1,3 @@
-import org.json4s.JsonAST.JObject
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
 
@@ -91,8 +90,8 @@ class TestScala extends AnyFlatSpec with should.Matchers {
   }
 
   "Json" should "be easy to manage" in {
-    import org.json4s._
     import org.json4s.JsonDSL._
+    import org.json4s._
     implicit val formats: DefaultFormats.type = DefaultFormats
 
     val json: JObject =
