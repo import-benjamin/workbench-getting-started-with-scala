@@ -39,8 +39,8 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     def f(x:Int)(y:Int)(z:Int) = x+y+z
 
     // function curring is more strict since you must specify parameters types
-    val h = f(10)(_:Int)(_:Int)
-    val i = f(10)(20)(_:Int)
+    // val h = f(10)(_:Int)(_:Int)
+    // val i = f(10)(20)(_:Int)
     val j = f(10)(20)(30)
     j shouldBe 60
   }
@@ -116,6 +116,5 @@ class TestScala extends AnyFlatSpec with should.Matchers {
         )
     val res = json \ "Key" \ "attribute2"
     res.extract[Int] shouldBe 1
-
   }
 }
