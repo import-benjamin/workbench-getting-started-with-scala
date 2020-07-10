@@ -117,4 +117,21 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     val res = json \ "Key" \ "attribute2"
     res.extract[Int] shouldBe 1
   }
+
+  "Array of int" should "return the highest value when using max" in {
+    val arr = Array( 2, 3, 4, 0, 10, 23, 4 )
+    arr.max shouldBe 23
+  }
+
+  "Case class" should "allow quick class declaration" in {
+    case class Student(name: String, age: Int)
+    val someStudent: Student = Student("Jean", 24)
+    someStudent.name shouldBe "Jean"
+  }
+
+  "for loop" should "run through all combinations given the number of iterator" in {
+    val loop_result: Seq[(Int, Int)] = for (i <- 0 until 3; j <- 0 until 3) yield (i, j)
+    // 0,1,2 all combinations give us a vector of 9 entries
+    loop_result.size shouldBe 9
+  }
 }
