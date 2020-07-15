@@ -65,6 +65,24 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     a.y shouldBe 10
   }
 
+  it should "be usable in pattern matching" in {
+    trait Animal
+    case class Dog(name: String) extends Animal
+    case class Cat(name: String) extends Animal
+    case object Woodpecker extends Animal
+
+    def matcher(v: Animal) = v match {
+      case Dog(name) => "Dog:"+name
+      case Cat(name) => "Cat:"+name
+      case Woodpecker => "Woodpecker"
+      case _ => "Other"
+    }
+
+    matcher(Cat("samantha")) shouldBe "Cat:samantha"
+    matcher(Dog("Alfred")) shouldBe "Dog:Alfred"
+
+  }
+
   "Pattern matching" should "be able to match type" in {
     case class A(x:Int)
 
@@ -133,5 +151,17 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     val loop_result: Seq[(Int, Int)] = for (i <- 0 until 3; j <- 0 until 3) yield (i, j)
     // 0,1,2 all combinations give us a vector of 9 entries
     loop_result.size shouldBe 9
+  }
+
+  "char occurrence" should "return the number of given a given char appear" in {
+    "coucou les copains".count(_ == 'c') shouldBe 3
+  }
+
+  "String" should "be convertable to Int" in {
+    "100".toInt shouldBe 100
+  }
+
+  it should "be convertable to Double" in {
+    "100".toDouble shouldBe 100.0
   }
 }
