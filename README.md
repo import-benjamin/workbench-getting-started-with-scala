@@ -1,8 +1,10 @@
 # :alembic: Getting started with scala
 
+![Scala CI](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/workflows/Scala%20CI/badge.svg)
+
 This repository contains multiples tests with a documentation to understand some scala and algorithm principles
 
-## Summary
+## :bookmark: Summary
 
 In `src/test/scala` :
 
@@ -10,7 +12,7 @@ In `src/test/scala` :
 - `calculus/TestComplex` test complex object to show off function
 - `generator/TestStringCombination` test to show off all possibles string permutation from a size span and a char Seq.
 
-## How to run tests
+## :test_tube: How to run tests
 
 __If you use Intellij Idea editor__:
 1. Get the contextual menu of folder `src/test/scala` and select `Run ScalaTests in scala`
@@ -40,4 +42,7 @@ __If you use sbt__:
     [success] Total time: 1 s, completed 30 juin 2020 à 11:54:13
     ```
 
+## :book: Documentation
+
+You'll find some notes and documentation directly into the [wiki](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/wiki) section of this repository
 

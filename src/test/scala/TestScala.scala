@@ -66,6 +66,12 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     a.y shouldBe 10
   }
 
+  it should "allow quick class declaration" in {
+    case class Student(name: String, age: Int)
+    val someStudent: Student = Student("Jean", 24)
+    someStudent.name shouldBe "Jean"
+  }
+
   it should "be usable in pattern matching" in {
     trait Animal
     case class Dog(name: String) extends Animal
@@ -113,6 +119,17 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     switch(4) shouldBe "Hello, there"
   }
 
+  it should "allow cons cell function" in {
+    val y: Seq[Int] = 1 :: 2 :: 3 :: Nil
+    // _.toList == val y = List(1, 2, 3)
+
+    def multiply(list: List[Int]): Int = list match {
+      case Nil => 1
+      case n :: rest => n * multiply(rest)
+    }
+    multiply(y.toList) shouldBe 6
+  }
+
   "Binary" should "be able to increment" in {
     var b: Int = 65
     b.toBinaryString shouldBe "1000001"
@@ -142,12 +159,6 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     arr.max shouldBe 23
   }
 
-  "Case class" should "allow quick class declaration" in {
-    case class Student(name: String, age: Int)
-    val someStudent: Student = Student("Jean", 24)
-    someStudent.name shouldBe "Jean"
-  }
-
   "for loop" should "run through all combinations given the number of iterator" in {
     val loop_result: Seq[(Int, Int)] = for (i <- 0 until 3; j <- 0 until 3) yield (i, j)
     // 0,1,2 all combinations give us a vector of 9 entries
@@ -158,23 +169,12 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     "coucou les copains".count(_ == 'c') shouldBe 3
   }
 
-  "String" should "be convertable to Int" in {
+  "String" should "be convertible to Int" in {
     "100".toInt shouldBe 100
   }
 
-  it should "be convertable to Double" in {
+  it should "be convertible to Double" in {
     "100".toDouble shouldBe 100.0
-  }
-
-  "Match expression" should "allow cons cell function" in {
-    val y: Seq[Int] = 1 :: 2 :: 3 :: Nil
-    // _.toList == val y = List(1, 2, 3)
-
-    def multiply(list: List[Int]): Int = list match {
-      case Nil => 1
-      case n :: rest => n * multiply(rest)
-    }
-    multiply(y.toList) shouldBe 6
   }
 
   "File" should "be openable from resources folder" in {
@@ -188,12 +188,18 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     jsonFile \ "project" \ "source" shouldBe JString("scala")
   }
 
-  "File" should "be openable from working directory" in {
+  it should "be openable from working directory" in {
     import scala.io.Source
     val file = Source.fromFile("README.md")
     val rawFile: Seq[String] = file.getLines().toList
     file.close()
 
     rawFile should contain ("## Summary")
+  }
+
+  "glob pattern" should "allow to fetch matching filename" in {
+    import java.io.File
+    val files = new File(".").listFiles().filter(_.isFile).filter(s => ".*md$".r.matches(s.getName))
+    files.length shouldBe 1
   }
 }
