@@ -194,7 +194,7 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     val rawFile: Seq[String] = file.getLines().toList
     file.close()
 
-    rawFile should contain ("## Summary")
+    rawFile should contain ("# :alembic: Getting started with scala")
   }
 
   "glob pattern" should "allow to fetch matching filename" in {
