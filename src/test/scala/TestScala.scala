@@ -202,4 +202,10 @@ class TestScala extends AnyFlatSpec with should.Matchers {
     val files = new File(".").listFiles().filter(_.isFile).filter(s => ".*md$".r.matches(s.getName))
     files.length shouldBe 1
   }
+
+  "Scalatest" should "handle exception" in {
+    @throws(classOf[Exception])
+    def throw_function(): Unit = throw new Exception
+    assertThrows[Exception](throw_function())
+  }
 }
