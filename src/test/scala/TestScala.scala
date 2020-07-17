@@ -1,6 +1,7 @@
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
 
+import scala.io.BufferedSource
 import scala.language.postfixOps
 
 class TestScala extends AnyFlatSpec with should.Matchers {
@@ -163,5 +164,36 @@ class TestScala extends AnyFlatSpec with should.Matchers {
 
   it should "be convertable to Double" in {
     "100".toDouble shouldBe 100.0
+  }
+
+  "Match expression" should "allow cons cell function" in {
+    val y: Seq[Int] = 1 :: 2 :: 3 :: Nil
+    // _.toList == val y = List(1, 2, 3)
+
+    def multiply(list: List[Int]): Int = list match {
+      case Nil => 1
+      case n :: rest => n * multiply(rest)
+    }
+    multiply(y.toList) shouldBe 6
+  }
+
+  "File" should "be openable from resources folder" in {
+    import org.json4s.JValue
+    import org.json4s.JsonAST.JString
+    import org.json4s.native.JsonMethods.parse
+    import scala.io.Source
+    val rawFile: Iterator[String] = Source.fromResource("file.json").getLines()
+    val jsonFile: JValue = parse(rawFile.mkString)
+
+    jsonFile \ "project" \ "source" shouldBe JString("scala")
+  }
+
+  "File" should "be openable from working directory" in {
+    import scala.io.Source
+    val file = Source.fromFile("README.md")
+    val rawFile: Seq[String] = file.getLines().toList
+    file.close()
+
+    rawFile should contain ("## Summary")
   }
 }
