@@ -1,8 +1,12 @@
 # :alembic: Getting started with scala
 
 ![Scala CI](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/workflows/Scala%20CI/badge.svg)
-
+![sbt version](https://img.shields.io/badge/sbt-1.3.13-blue?labelColor=282d33)
+![scala version](https://img.shields.io/badge/scala-2.13.3-blue?labelColor=282d33)
+[![scala version](https://img.shields.io/badge/documentation-wiki-important?labelColor=282d33)](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/wiki)
 This repository contains multiples tests with a documentation to understand some scala and algorithm principles
+
+![sbt peek](.github/peek.gif)
 
 ## :bookmark: Summary
 
