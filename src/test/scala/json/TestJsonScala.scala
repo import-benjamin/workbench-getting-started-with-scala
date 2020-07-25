@@ -2,13 +2,14 @@ package json
 
 import org.json4s.DefaultFormats
 import org.json4s.JsonDSL._
-import org.json4s.JsonAST.{JField, JInt, JObject, JString}
+import org.json4s.native.JsonMethods.{render, pretty}
+import org.json4s.JsonAST.{JField, JInt, JNothing, JObject, JString}
 import org.scalatest.matchers.should
 import org.scalatest.wordspec.AnyWordSpec
 
 case class Person(name: String, age: Int)
 
-class TestJsonScala extends AnyWordSpec with should.Matchers{
+class TestJsonScala extends AnyWordSpec with should.Matchers {
 
   implicit val formats: DefaultFormats.type = DefaultFormats
   "Json" when {
@@ -31,14 +32,53 @@ class TestJsonScala extends AnyWordSpec with should.Matchers{
         val john = jsonValue.extract[Person]
         john shouldBe Person("john", 10)
       }
+
+      "using transform operator" in {
+        val res = jsonValue transformField {
+          case ("name", JString(s)) => ("name", JString(s.toUpperCase))
+        }
+        (res \ "name") shouldBe JString("JOHN")
+      }
+
+      "allow to flatten" in {
+        val json: JObject =
+          "Key" -> (
+            "opt" -> (
+              ("attribute1" -> 0) ~
+                ("attribute2" -> 1) ~
+                ("attribute3" -> 2)
+              ))
+        val res = json transformField {
+          case JField("Key", attr) => JField("opt", attr \ "opt")
+        }
+        (res \ "opt" \ "attribute1") shouldBe JInt(0)
+      }
     }
 
     "deleting" should {
       val jsonValue: JObject = ("name" -> "sarah") ~ ("age" -> 10)
+      val jsonValue2: JObject = ("options" -> (
+        ("name", "opt1") ~
+          ("name", "opt2") ~
+          ("name", "opt3")
+        )
+        ) ~ ("name", "filter")
+
       "be able to remove one entry" in {
-        val sarah = (jsonValue removeField { _ == JField("age", JInt(10))})
+        val sarah = (jsonValue removeField {
+          _ == JField("age", JInt(10))
+        })
         sarah.extractOpt[Person] shouldBe None
       }
+
+      "remove JArray" in {
+        val result = jsonValue2 removeField {
+          case ("options", _) => true
+          case _ => false
+        }
+        (result \ "options") shouldBe JNothing
+      }
+
       "remove null entry" in {
         val sarah = (jsonValue transformField {
           case JField("age", JInt(age)) => ("age", None: Option[Int])
