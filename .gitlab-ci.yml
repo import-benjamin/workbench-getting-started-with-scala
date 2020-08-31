@@ -1,0 +1,12 @@
+
+default:
+    image: openjdk:16-jdk
+    before_script:
+        - java -version
+
+sbt tests:
+    script:
+        - sbt test coverageReport
+    artifacts:
+        untracked: true
+        expire_in: 30 days
