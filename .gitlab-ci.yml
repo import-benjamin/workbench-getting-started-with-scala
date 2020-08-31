@@ -1,7 +1,3 @@
-
-include:
-  - template: Code-Quality.gitlab-ci.yml
-
 default:
     image: openjdk:16-slim
     before_script:
