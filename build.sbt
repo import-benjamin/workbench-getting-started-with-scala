@@ -2,6 +2,10 @@ name := "workbench-getting-started-with-scala"
 
 version := "0.1"
 
+organization := "io.gitlab.benjaminboboul.scala"
+
+description := "Collection of snippets to learn and test scala"
+
 scalaVersion := "2.13.3"
 coverageEnabled := true
 

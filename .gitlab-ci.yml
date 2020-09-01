@@ -17,7 +17,11 @@ default:
             apt-get install sbt -qq
         - sbt sbtVersion
 
-sbt tests:
+sbt_dependencyStats:
+  script:
+    - sbt dependencyTree dependencyStats
+
+sbt_tests:
     rules:
         - changes:
             - "**/**/*.scala"

@@ -1,12 +1,5 @@
 # :alembic: Getting started with scala
 
-![Scala CI](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/workflows/Scala%20CI/badge.svg)
-![sbt version](https://img.shields.io/badge/sbt-1.3.13-blue)
-![scala version](https://img.shields.io/badge/scala-2.13.3-blue)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c73333247a3680efbdc9/maintainability)](https://codeclimate.com/github/benjaminBoboul/workbench-getting-started-with-scala/maintainability)
-[![scala version](https://img.shields.io/badge/documentation-wiki-important)](https://github.com/benjaminBoboul/workbench-getting-started-with-scala/wiki)  
-![](https://img.shields.io/codeclimate/tech-debt/benjaminBoboul/workbench-getting-started-with-scala)
-
 This repository contains multiples tests with a documentation to understand some scala and algorithm principles
 
 ![sbt peek](.github/peek.gif)
@@ -19,7 +12,7 @@ In `src/test/scala` :
 - `calculus/TestComplex` test complex object to show off function
 - `generator/TestStringCombination` test to show off all possibles string permutation from a size span and a char Seq.
 
-## :test_tube: How to run tests
+## :satellite: How to run tests
 
 __If you use Intellij Idea editor__:
 1. Get the contextual menu of folder `src/test/scala` and select `Run ScalaTests in scala`
