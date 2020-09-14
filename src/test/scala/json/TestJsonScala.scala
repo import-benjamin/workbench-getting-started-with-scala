@@ -2,8 +2,7 @@ package json
 
 import org.json4s.DefaultFormats
 import org.json4s.JsonDSL._
-import org.json4s.native.JsonMethods.{render, pretty}
-import org.json4s.JsonAST.{JField, JInt, JNothing, JObject, JString}
+import org.json4s.JsonAST.{JField, JInt, JNothing, JObject, JString, JValue}
 import org.scalatest.matchers.should
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -65,9 +64,9 @@ class TestJsonScala extends AnyWordSpec with should.Matchers {
         ) ~ ("name", "filter")
 
       "be able to remove one entry" in {
-        val sarah = (jsonValue removeField {
+        val sarah = jsonValue removeField {
           _ == JField("age", JInt(10))
-        })
+        }
         sarah.extractOpt[Person] shouldBe None
       }
 
@@ -80,9 +79,9 @@ class TestJsonScala extends AnyWordSpec with should.Matchers {
       }
 
       "remove null entry" in {
-        val sarah = (jsonValue transformField {
-          case JField("age", JInt(age)) => ("age", None: Option[Int])
-        })
+        val sarah = jsonValue transformField {
+          case JField("age", JInt(_)) => ("age", None: Option[Int])
+        }
         sarah.extractOpt[Person] shouldBe None
       }
     }
@@ -94,6 +93,38 @@ class TestJsonScala extends AnyWordSpec with should.Matchers {
           case JField("age", JString(s)) => ("age", JInt(s.toInt))
         }).extract[Person]
         jane shouldBe Person("jane", 10)
+      }
+    }
+  }
+
+  "Json4s" when {
+    "parsing with case class" should {
+      "allow extends without adding or editing existing field" in {
+        import org.json4s.native.JsonMethods.parse
+        val some_file: JValue = parse(
+          """
+            |{
+            | "report": {
+            |   "trees": {
+            |     "tree": {
+            |       "name": "oak",
+            |       "size": "5m"
+            |     }
+            |   }
+            | }
+            |}
+            |""".stripMargin)
+        val some_file_two: JValue = parse(
+          """
+            |{
+            | "report": {
+            |   "tree": {
+            |     "name": "birch",
+            |     "size": "4.3m"
+            |   }
+            | }
+            |}
+            |""".stripMargin)
       }
     }
   }
