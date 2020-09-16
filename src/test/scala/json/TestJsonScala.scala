@@ -97,35 +97,5 @@ class TestJsonScala extends AnyWordSpec with should.Matchers {
     }
   }
 
-  "Json4s" when {
-    "parsing with case class" should {
-      "allow extends without adding or editing existing field" in {
-        import org.json4s.native.JsonMethods.parse
-        val some_file: JValue = parse(
-          """
-            |{
-            | "report": {
-            |   "trees": {
-            |     "tree": {
-            |       "name": "oak",
-            |       "size": "5m"
-            |     }
-            |   }
-            | }
-            |}
-            |""".stripMargin)
-        val some_file_two: JValue = parse(
-          """
-            |{
-            | "report": {
-            |   "tree": {
-            |     "name": "birch",
-            |     "size": "4.3m"
-            |   }
-            | }
-            |}
-            |""".stripMargin)
-      }
-    }
-  }
+
 }
