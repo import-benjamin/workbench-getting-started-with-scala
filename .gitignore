@@ -1,3 +1,7 @@
 target
 .idea
 junit
+.vscode
+.metals
+project/project
+.bloop
