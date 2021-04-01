@@ -5,3 +5,4 @@ junit
 .metals
 project/project
 .bloop
+.bsp

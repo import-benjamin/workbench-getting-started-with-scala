@@ -9,6 +9,11 @@ description := "Collection of snippets to learn and test scala"
 scalaVersion := "2.13.5"
 coverageEnabled := true
 
+scalacOptions += "-feature"
+scalacOptions += "-deprecation"
+
+Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF")
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.5" % "test"
 libraryDependencies += "org.json4s" %% "json4s-native" % "3.6.11"
 libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.6.12"

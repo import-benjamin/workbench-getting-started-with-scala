@@ -77,6 +77,43 @@ class TestScala extends AnyWordSpec with should.Matchers {
     }
   }
 
+  "Implicit in scala" when {
+    "using implicit variables" should {
+      "autocomplete implicit function parameters" in {
+        implicit val greeting: String = "Hello"
+        def greet(name: String)(implicit greeting: String): String = s"$greeting, $name" 
+        
+        greet("Tom") shouldBe "Hello, Tom"
+      }
+    }
+
+    "using implicit function" should {
+      "be used to convert object" in {
+        import scala.language.implicitConversions
+
+        case class Person(name: String) {
+          def greet = s"Hello, $name"
+        }
+
+        implicit def stringToPerson(string: String): Person = Person(string)
+
+        "Tom".greet shouldBe "Hello, Tom"
+        // stringToPerson("Tom").greet
+      }
+    }
+
+    "using implicit class" should {
+      "be used to convert object too" in {
+        implicit class Dog(name: String) {
+          def bark = "bark!"
+        }
+
+        "Doggo".bark shouldBe "bark!"
+        // new Dog("Doggo").bark
+      }
+    }
+  }
+
   "Case class" when {
     "defined" should {
       "provide class with public attribute" in {
