@@ -24,7 +24,7 @@ class TestJson4s extends AnyWordSpec with should.Matchers {
           |      {
           |       "id": "here",
           |       "content": "some_data"
-          |      },
+          |      }
           |   ]
           | }
           |}

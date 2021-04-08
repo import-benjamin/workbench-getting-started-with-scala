@@ -4,6 +4,9 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
 import akka.actor.{Actor, ActorSystem, Props}
 
+// An actor can be interpreted as an object which is able to run asynchronously
+// When using actors, scala will start a thread pool to execute actor.
+// An actor can be run by only one thread at once.
 class Boat extends Actor {
   var touche: Boolean = false
   def receive: Receive = {
@@ -23,6 +26,8 @@ class SomeActor extends Actor {
   }    
 }
 
+
+// If we want to use an actor with attribute, simply add it when declaring your class
 class ActorWithAttribute(name: String) extends Actor {
 
   def receive: Receive = {
@@ -37,7 +42,7 @@ class ActorWithAttribute(name: String) extends Actor {
 // But we tend to prefer the use of an object companion like the following
 
 object ActorWithAttribute {
-  def props(name: String) = Props(new ActorWithAttribute(name))
+  def props(name: String): Props = Props(new ActorWithAttribute(name))
 }
 
 // then call is with system.actorOf(ActorWithAttribute.props("tom"))
