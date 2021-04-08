@@ -16,7 +16,8 @@ Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oDF")
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.5" % "test"
 libraryDependencies += "org.json4s" %% "json4s-native" % "3.6.11"
-libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.6.12"
+libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.6.14"
+libraryDependencies += "com.typesafe.akka" %% "akka-actor-testkit-typed" % "2.6.14" % Test
 libraryDependencies += "com.typesafe.akka" %% "akka-http-core" % "10.2.4"
 
 // Add junit report generation
