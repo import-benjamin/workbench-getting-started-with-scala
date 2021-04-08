@@ -44,8 +44,30 @@ class ActorWithAttribute(name: String) extends Actor {
 object ActorWithAttribute {
   def props(name: String): Props = Props(new ActorWithAttribute(name))
 }
-
 // then call is with system.actorOf(ActorWithAttribute.props("tom"))
+
+// Stateless Actor with multiples handlers
+class StatelessActor extends Actor {
+
+  // default receive function to receiveA
+  def receive: Receive = receiveA
+
+  def receiveA: Receive = {
+    // route receive function to receiveB
+    case "toggle" => context.become(receiveB)
+    // stackHandler won't replace existing handler but instead it will stack receiveB on top of receiveA
+    case "stackHandler" => context.become(receiveB, discardOld = false)
+    case "output" => println("receiveA")
+  }
+
+  def receiveB: Receive = {
+    // route receive function to receiveA
+    case "toggle" => context.become(receiveA)
+    // when used with receiveA:stackHandler, the receive stack will pop our func and return its prior state (receiveA).
+    case "stackHandler" => context.unbecome()
+    case "output" => println("receiveB")
+  }
+}
 
 class TestActorModel extends AnyFlatSpec with should.Matchers {
   "Basic Actor" should "be able to receive message" in {
