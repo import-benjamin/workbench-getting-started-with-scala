@@ -2,7 +2,7 @@ package concurrency
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
-import akka.actor.{Actor, ActorSystem, Props}
+import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 
 // An actor can be interpreted as an object which is able to run asynchronously
 // When using actors, scala will start a thread pool to execute actor.
@@ -66,6 +66,14 @@ class StatelessActor extends Actor {
     // when used with receiveA:stackHandler, the receive stack will pop our func and return its prior state (receiveA).
     case "stackHandler" => context.unbecome()
     case "output" => println("receiveB")
+  }
+}
+
+
+class SimpleActorWithLogger extends Actor with ActorLogging {
+  override def receive: Receive = {
+    case message: String => log.info(s"Got $message")
+    case _ =>
   }
 }
 
