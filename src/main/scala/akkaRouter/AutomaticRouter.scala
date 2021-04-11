@@ -12,4 +12,5 @@ object AutomaticRouter extends App {
     poolMaster ! s"$index Hello, world!"
   }
 
+  system.terminate()
 }
