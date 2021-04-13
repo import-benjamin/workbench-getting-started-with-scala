@@ -1,4 +1,4 @@
-package akkaRouter
+package akkaActor.router
 
 import akka.actor.{Actor, ActorLogging, Props}
 import akka.routing.{ActorRefRoutee, RoundRobinRoutingLogic, Router}

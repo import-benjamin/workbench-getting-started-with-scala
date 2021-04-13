@@ -1,4 +1,4 @@
-package akkaRouter
+package akkaActor.router
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import akka.routing.RoundRobinPool

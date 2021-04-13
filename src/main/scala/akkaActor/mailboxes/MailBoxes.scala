@@ -1,4 +1,4 @@
-package akkaMailBoxes
+package akkaActor.mailboxes
 
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import akka.dispatch.{PriorityGenerator, UnboundedPriorityMailbox}
