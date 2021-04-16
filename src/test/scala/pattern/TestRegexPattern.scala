@@ -1,3 +1,4 @@
+/*
 package pattern
 
 import org.scalatest.matchers.should
@@ -13,3 +14,4 @@ class TestRegexPattern extends AnyWordSpec with should.Matchers {
     }
   }
 }
+*/

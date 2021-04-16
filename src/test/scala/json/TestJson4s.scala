@@ -1,3 +1,4 @@
+/*
 package json
 
 import org.json4s.{DefaultFormats, JArray, JObject, JsonAST}
@@ -40,3 +41,4 @@ class TestJson4s extends AnyWordSpec with should.Matchers {
     }
   }
 }
+*/

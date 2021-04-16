@@ -8,7 +8,7 @@ object manualRouter extends App {
   class Master extends Actor {
 
     private val slaves: IndexedSeq[ActorRefRoutee] = for (index <- 1 to 5) yield {
-      val slave = context.actorOf(Props[Slave], s"slave$index")
+      val slave = context.actorOf(Props[Slave](), s"slave$index")
       context.watch(slave)
       ActorRefRoutee(slave)
     }
