@@ -1,4 +1,4 @@
-/*
+
 package concurrency
 
 import org.scalatest.flatspec.AnyFlatSpec
@@ -104,4 +104,3 @@ class TestActorModel extends AnyFlatSpec with should.Matchers {
     myActor ! "context"
   }
 }
-*/

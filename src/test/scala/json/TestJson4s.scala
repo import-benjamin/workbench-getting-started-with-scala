@@ -1,9 +1,8 @@
-/*
 package json
 
 import org.json4s.{DefaultFormats, JArray, JObject, JsonAST}
-import org.json4s.native.JsonMethods
-import org.json4s.native.JsonMethods.{pretty, render}
+import org.json4s.jackson.JsonMethods
+import org.json4s.jackson.JsonMethods.{pretty, render}
 import org.scalatest.matchers.should
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -41,4 +40,3 @@ class TestJson4s extends AnyWordSpec with should.Matchers {
     }
   }
 }
-*/

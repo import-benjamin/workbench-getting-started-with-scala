@@ -1,4 +1,4 @@
-/*
+
 package concurrency
 
 import akka.actor.testkit.typed.scaladsl.ActorTestKit
@@ -30,4 +30,4 @@ class TestProperlyActor extends AnyFlatSpec with Matchers with BeforeAndAfterAll
     probe.expectMessage(Echo.Pong("hello"))
   }
 }
-*/
+

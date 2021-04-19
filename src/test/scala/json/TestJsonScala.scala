@@ -1,4 +1,3 @@
-/*
 package json
 
 import org.json4s.DefaultFormats
@@ -100,4 +99,3 @@ class TestJsonScala extends AnyWordSpec with should.Matchers {
 
 
 }
-*/

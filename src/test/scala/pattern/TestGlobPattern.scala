@@ -1,25 +1,18 @@
-/*
+
 package pattern
+
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import java.nio.file.Paths
 
-import org.scalatest.wordspec.AnyWordSpec
+class TestGlobPattern extends AnyFlatSpec with Matchers{
 
-class TestGlobPattern extends AnyWordSpec {
-
-  "Given a specific pattern" when {
-    val pattern = "somefile@src/main/scala/**/*.scala"
-    val patternType, patternGlob = pattern.split('@')
-
-    "The type specification" should {}
-    "A glob pattern" should {
-      "match case as good as other tools" in {
-
-        val fileInstance = Paths.get(".")
-        val files = fileInstance.resolve(patternGlob.mkString)
-        println(files)
-      }
-    }
+  "Glob pattern" should "match valid files" in {
+    val pattern = "src/main/scala/**/*.scala"
+    val dir = Paths.get(".")
+    val files = dir.getFileSystem.getPathMatcher("glob:"+pattern)
+    println(files)
   }
 }
-*/
+

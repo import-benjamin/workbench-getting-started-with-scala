@@ -1,4 +1,4 @@
-/*
+
 package concurrency
 
 import akka.actor.{Actor, ActorLogging, ActorRef, ActorSystem, Props}
@@ -31,4 +31,3 @@ class ConfigureActor extends AnyFlatSpec with should.Matchers {
 
   }
 }
-*/
